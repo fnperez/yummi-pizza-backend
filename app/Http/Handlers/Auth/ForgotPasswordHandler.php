@@ -2,24 +2,24 @@
 
 namespace App\Http\Handlers\Auth;
 
-use App\Http\Handlers\Controller;
-use Illuminate\Foundation\Auth\ResetsPasswords;
+use App\Http\Handlers\Handler;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 
-class ResetPasswordController extends Controller
+class ForgotPasswordHandler extends Handler
 {
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
     |--------------------------------------------------------------------------
     |
-    | This controller is responsible for handling password reset requests
-    | and uses a simple trait to include this behavior. You're free to
-    | explore this trait and override any methods you wish to tweak.
+    | This controller is responsible for handling password reset emails and
+    | includes a trait which assists in sending these notifications from
+    | your application to your users. Feel free to explore this trait.
     |
     */
 
-    use ResetsPasswords;
+    use SendsPasswordResetEmails;
 
     /**
      * Create a new controller instance.
@@ -32,25 +32,25 @@ class ResetPasswordController extends Controller
     }
 
     /**
-     * Get the response for a successful password reset.
+     * Get the response for a successful password reset link.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function sendResetResponse(Request $request, $response)
+    protected function sendResetLinkResponse(Request $request, $response)
     {
         return ['status' => trans($response)];
     }
 
     /**
-     * Get the response for a failed password reset.
+     * Get the response for a failed password reset link.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function sendResetFailedResponse(Request $request, $response)
+    protected function sendResetLinkFailedResponse(Request $request, $response)
     {
         return response()->json(['email' => trans($response)], 400);
     }

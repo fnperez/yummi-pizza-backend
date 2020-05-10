@@ -4,19 +4,29 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Repositories;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use YummiPizza\Repositories\PersistRepository;
 
 class EloquentPersistRepository implements PersistRepository
 {
+    /**
+     * @param Model $entity
+     * @return bool
+     */
     public function save($entity)
     {
         return $entity->save();
     }
 
+    /**
+     * @param Model $entity
+     * @return bool|null
+     * @throws \Exception
+     */
     public function remove($entity)
     {
-        return $entity->remove();
+        return $entity->delete();
     }
 
     public function transactional(callable $function)

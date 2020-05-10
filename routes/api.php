@@ -28,9 +28,9 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 
 Route::group(['middleware' => 'guest:api'], function () {
-    Route::post('auth/login', \App\Http\Handlers\Auth\LoginController::class.'@login');
-    Route::post('auth/register', \App\Http\Handlers\Auth\RegisterController::class . '@register');
+    Route::post('auth/login', \App\Http\Handlers\Auth\LoginHandler::class.'@login');
+    Route::post('auth/register', \App\Http\Handlers\Auth\RegisterHandler::class . '@register');
 
-    Route::post('password/email', \App\Http\Handlers\Auth\ForgotPasswordController::class . '@sendResetLinkEmail');
-    Route::post('password/reset', \App\Http\Handlers\Auth\ResetPasswordController::class . '@reset');
+    Route::post('password/email', \App\Http\Handlers\Auth\ForgotPasswordHandler::class . '@sendResetLinkEmail');
+    Route::post('password/reset', \App\Http\Handlers\Auth\ResetPasswordHandler::class . '@reset');
 });

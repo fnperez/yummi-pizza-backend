@@ -2,10 +2,10 @@
 
 namespace App\Http\Handlers\Auth;
 
-use App\Http\Handlers\Controller;
+use App\Http\Handlers\Handler;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 
-class VerificationController extends Controller
+class VerificationHandler extends Handler
 {
     /*
     |--------------------------------------------------------------------------

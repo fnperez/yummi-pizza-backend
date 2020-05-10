@@ -2,12 +2,12 @@
 
 namespace App\Http\Handlers\Auth;
 
-use App\Http\Handlers\Controller;
+use App\Http\Handlers\Handler;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-class LoginController extends Controller
+class LoginHandler extends Handler
 {
     /*
     |--------------------------------------------------------------------------

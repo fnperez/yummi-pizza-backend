@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests\Account;
 
 use Illuminate\Foundation\Http\FormRequest;
+use YummiPizza\Contracts\IUser;
 use YummiPizza\Payloads\Account\EditPasswordPayload;
 
 class EditPasswordRequest extends FormRequest implements EditPasswordPayload
@@ -16,7 +17,7 @@ class EditPasswordRequest extends FormRequest implements EditPasswordPayload
         ];
     }
 
-    public function getCurrentUser()
+    public function getCurrentUser(): IUser
     {
         return $this->user();
     }

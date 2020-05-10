@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace YummiPizza\Services;
 
+use YummiPizza\Contracts\IUser;
 use YummiPizza\Payloads\Account\EditPasswordPayload;
 use YummiPizza\Entities\User;
 use YummiPizza\Payloads\Account\EditProfilePayload;
@@ -21,9 +22,8 @@ class UserService
         $this->repository = $repository;
     }
 
-    public function editPassword(EditPasswordPayload $payload)
+    public function editPassword(EditPasswordPayload $payload): IUser
     {
-        /** @var User $user */
         $user = $payload->getCurrentUser();
 
         $user->setPassword(\Hash::make($payload->getNewPassword()));
@@ -33,7 +33,7 @@ class UserService
         return $user;
     }
 
-    public function editProfile(EditProfilePayload $payload)
+    public function editProfile(EditProfilePayload $payload): IUser
     {
         /** @var User $user */
         $user = $payload->getCurrentUser();

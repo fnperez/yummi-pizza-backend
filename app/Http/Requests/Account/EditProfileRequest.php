@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Account;
 
 use Illuminate\Foundation\Http\FormRequest;
+use YummiPizza\Contracts\IUser;
 use YummiPizza\Payloads\Account\EditProfilePayload;
 
 class EditProfileRequest extends FormRequest implements EditProfilePayload
@@ -20,7 +21,7 @@ class EditProfileRequest extends FormRequest implements EditProfilePayload
         ];
     }
 
-    public function getCurrentUser()
+    public function getCurrentUser(): IUser
     {
         return $this->user();
     }

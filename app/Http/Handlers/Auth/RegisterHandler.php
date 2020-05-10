@@ -3,14 +3,14 @@
 namespace App\Http\Handlers\Auth;
 
 use YummiPizza\Entities\User;
-use App\Http\Handlers\Controller;
+use App\Http\Handlers\Handler;
 use App\Http\Resources\UserResource as UserResource;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class RegisterController extends Controller
+class RegisterHandler extends Handler
 {
     /*
     |--------------------------------------------------------------------------

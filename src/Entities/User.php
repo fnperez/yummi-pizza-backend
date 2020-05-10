@@ -2,14 +2,17 @@
 
 namespace YummiPizza\Entities;
 
+use Illuminate\Support\Carbon;
+use YummiPizza\Contracts\IUser;
 use YummiPizza\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use YummiPizza\Traits\HasTimestamps;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, IUser
 {
-    use Notifiable;
+    use Notifiable, HasTimestamps;
 
     /**
      * The attributes that are mass assignable.
@@ -37,11 +40,6 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function setPassword(string $password): void
-    {
-        $this->password = $password;
-    }
 
     /**
      * @return int
@@ -80,25 +78,40 @@ class User extends Authenticatable implements JWTSubject
         $this->email = $email;
     }
 
-    public function getEmail(): string
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    public function getEmail():? string
     {
         return $this->email;
     }
 
-    public function getName(): string
+    public function getName():? string
     {
         return $this->name;
     }
 
-    public function getPassword(): string
+    public function getPassword():? string
     {
         return $this->password;
     }
 
-    public function markEmailAsUnverified()
+    public function markEmailAsUnverified(): void
     {
         $this->forceFill([
             'email_verified_at' => null,
         ])->save();
+    }
+
+    public function getId(): string
+    {
+        return $this->getKey();
+    }
+
+    public function getVerifiedAt():? Carbon
+    {
+        return $this->email_verified_at;
     }
 }
