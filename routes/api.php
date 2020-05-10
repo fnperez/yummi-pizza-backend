@@ -23,7 +23,7 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('auth/me', \App\Http\Handlers\Auth\MeHandler::class);
 
-    Route::patch('account/profile', \App\Http\Handlers\Account\ProfileController::class . '@update');
+    Route::patch('account/profile', \App\Http\Handlers\Account\EditProfileHandler::class);
     Route::patch('account/password', \App\Http\Handlers\Account\EditPasswordHandler::class);
 });
 

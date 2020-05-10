@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace YummiPizza\Payloads\Account;
 
-interface EditPasswordPayload
+interface EditProfilePayload
 {
     public function getCurrentUser();
-    public function getNewPassword(): string;
+    public function getName(): string;
+    public function getEmail(): string;
 }

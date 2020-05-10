@@ -69,4 +69,36 @@ class User extends Authenticatable implements JWTSubject
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function markEmailAsUnverified()
+    {
+        $this->forceFill([
+            'email_verified_at' => null,
+        ])->save();
+    }
 }
