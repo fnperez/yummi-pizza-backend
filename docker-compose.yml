@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: app.dockerfile
+    working_dir: /var/www/app
+    volumes:
+      - ./:/var/www/app
+
+  web:
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    working_dir: /var/www/app
+    volumes:
+      - ./:/var/www/app
+    ports:
+      - 8081:80
+
+  database:
+    image: mysql:5.7
+    volumes:
+      - ./docker/mysql/dbdata:/var/lib/mysql
+    environment:
+      - "MYSQL_DATABASE=${DB_DATABASE}"
+      - "MYSQL_USER=${DB_USERNAME}"
+      - "MYSQL_PASSWORD=${DB_PASSWORD}"
+      - "MYSQL_ROOT_PASSWORD=${DB_PASSWORD}"
+    ports:
+      - "33061:3306"
+
+  redis:
+    build:
+      context: ./
+      dockerfile: redis.dockerfile
+    volumes:
+      - ./docker/redis/data:/redisdata
+    ports:
+      - "63790:6379"
+
+volumes:
+  dbdata:
+    driver: "local"
+  sessions:
+    driver: "local"
+  redisdata:
+    driver: "local"
