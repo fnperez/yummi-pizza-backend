@@ -48,7 +48,7 @@ class Cart extends Model implements ICart
         }
     }
 
-    public function calculatePrice(): Money
+    public function getTotalPrice(): Money
     {
         $price = Money::USD(0);
 

@@ -49,3 +49,8 @@ Route::group(['prefix' => 'cart_items'], function() {
     Route::post('/', \App\Http\Handlers\CartItem\AddHandler::class);
     Route::put('{id}', \App\Http\Handlers\CartItem\EditHandler::class);
 });
+
+Route::group(['prefix' => 'invoices'], function() {
+    Route::post('/', \App\Http\Handlers\Invoice\AddHandler::class);
+    Route::post('{id}/pay', \App\Http\Handlers\Invoice\PayHandler::class);
+});

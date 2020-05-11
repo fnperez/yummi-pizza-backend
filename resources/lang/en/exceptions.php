@@ -20,5 +20,13 @@ return [
     500 => [
         'message' => 'Fatal error',
         'description' => 'Something went wrong, please try later.',
+    ],
+    'invalid_delivery_type' => [
+        'message' => 'Delivery type is invalid.',
+        'description' => 'Delivery type :type does not exist or it is not supported.'
+    ],
+    'already_payed' => [
+        'message' => 'Invoice is already payed',
+        'description' => 'Invoice :invoice is already payed'
     ]
 ];

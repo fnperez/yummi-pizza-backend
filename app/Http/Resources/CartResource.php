@@ -11,12 +11,12 @@ class CartResource extends JsonResource
 {
     public function toArray($request)
     {
-        $totalPrice = $this->calculatePrice();
-
         return [
             'id' => $this->getId(),
-            'items' => CartItemResource::collection($this->whenLoaded('items')),
-            'price' => CurrencyResource::make($totalPrice),
+            'items' => CartItemResource::collection($this->items),
+            'price' => CurrencyResource::make($this->getTotalPrice()),
+            'created_at' => $this->getCreatedAt(),
+            'updated_at' => $this->getUpdatedAt(),
         ];
     }
 }

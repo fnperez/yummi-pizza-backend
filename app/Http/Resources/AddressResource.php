@@ -18,6 +18,8 @@ class AddressResource extends JsonResource
             'city' => $this->getCity(),
             'floor' => $this->getFloor(),
             'phone_number' => $this->getPhoneNumber(),
+            'created_at' => $this->getCreatedAt(),
+            'updated_at' => $this->getUpdatedAt(),
         ];
     }
 }

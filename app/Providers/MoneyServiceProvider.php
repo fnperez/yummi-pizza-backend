@@ -8,7 +8,11 @@ use Illuminate\Support\ServiceProvider;
 use Money\Converter;
 use Money\Currencies\ISOCurrencies;
 use Money\Exchange\FixedExchange;
+use YummiPizza\Contracts\IDeliveryCalculator;
 use YummiPizza\Contracts\IMoneyConverter;
+use YummiPizza\Factories\DeliveryCalculatorFactory;
+use YummiPizza\Helpers;
+use YummiPizza\Utils\FixedDeliveryCalculator;
 
 class MoneyServiceProvider extends ServiceProvider
 {
@@ -23,6 +27,13 @@ class MoneyServiceProvider extends ServiceProvider
             $exchange = new FixedExchange(config('currency.exchanges'));
 
             return new Converter(new ISOCurrencies(), $exchange);
+        });
+
+        $this->app->bind(IDeliveryCalculator::class, function () {
+            $type = (string) config('delivery.default');
+            $config = config("delivery.{$type}");
+
+            return (new DeliveryCalculatorFactory)->make($type, $config);
         });
     }
 }
