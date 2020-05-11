@@ -30,9 +30,7 @@ class UserService
 
         $user->setPassword(\Hash::make($payload->getNewPassword()));
 
-        $this->repository->save($user);
-
-        return $user;
+        return $this->repository->save($user);
     }
 
     public function editProfile(EditProfilePayload $payload): IUser
@@ -42,16 +40,11 @@ class UserService
 
         $user->setName($payload->getName());
 
-        $mustVerify = $user->getEmail() !== $payload->getEmail();
-
         $user->setEmail($payload->getEmail());
 
-        $this->repository->save($user);
+        $user = $this->repository->save($user);
 
-        if ($mustVerify) {
-            $user->markEmailAsUnverified();
-            $user->sendEmailVerificationNotification();
-        }
+        // TODO: email verification
 
         return $user;
     }
@@ -63,9 +56,9 @@ class UserService
         $user->setName($payload->getName());
         $user->setPassword(\Hash::make($payload->getNewPassword()));
 
-        $this->repository->save($user);
+        $user = $this->repository->save($user);
 
-        event(new Registered($user));
+        // TODO: add verification email
 
         return $user;
     }

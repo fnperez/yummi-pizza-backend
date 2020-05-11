@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\JsonMiddleware;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -54,6 +55,8 @@ class Kernel extends HttpKernel
         'app.locale' => \App\Http\Middleware\LocaleMiddleware::class,
         'app.etags' => \App\Http\Middleware\ETagsMiddleware::class,
         'app.cors' => \App\Http\Middleware\CorsMiddleware::class,
+        'app.return-json' => JsonMiddleware::class,
+
     ];
 
     /**
@@ -64,6 +67,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middlewarePriority = [
+        JsonMiddleware::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \Illuminate\Auth\Middleware\Authenticate::class,

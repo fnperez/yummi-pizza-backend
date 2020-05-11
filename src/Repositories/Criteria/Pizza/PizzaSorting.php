@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace YummiPizza\Repositories\Criteria\Users;
+namespace YummiPizza\Repositories\Criteria\Pizza;
 
 class PizzaSorting
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Requests\Pizza;
+namespace App\Http\Requests\Pizza;
 
 use App\Http\Requests\CriteriaRequest;
 use YummiPizza\Repositories\Criteria\Pizza\PizzaFilter;
-use YummiPizza\Repositories\Criteria\Users\PizzaSorting;
+use YummiPizza\Repositories\Criteria\Pizza\PizzaSorting;
 
 class BrowseRequest extends CriteriaRequest
 {

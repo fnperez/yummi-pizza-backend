@@ -9,14 +9,17 @@ use Money\Money;
 use YummiPizza\Contracts\IPizza;
 use YummiPizza\Helpers;
 use YummiPizza\Traits\HasTimestamps;
+use YummiPizza\Traits\UuidGenerator;
 
 class Pizza extends Model implements IPizza
 {
-    use HasTimestamps;
+    use HasTimestamps, UuidGenerator;
+
+    public $incrementing = false;
 
     public function getId(): string
     {
-        return $this->getKey();
+        return $this->id;
     }
 
     public function getImageUrl(): string
@@ -37,5 +40,25 @@ class Pizza extends Model implements IPizza
     public function getPrice(): Money
     {
         return Helpers::getMoney($this->price);
+    }
+
+    public function setImageUrl(string $imageUrl): void
+    {
+        $this->image_url = $imageUrl;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function setPrice(Money $price): void
+    {
+        $this->price = $price->getAmount();
     }
 }

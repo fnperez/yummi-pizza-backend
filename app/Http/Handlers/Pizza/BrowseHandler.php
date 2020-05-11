@@ -6,7 +6,7 @@ namespace App\Http\Handlers\Pizza;
 
 use App\Http\Collections\PizzaCollection;
 use App\Http\Handlers\Handler;
-use App\Requests\Pizza\BrowseRequest;
+use App\Http\Requests\Pizza\BrowseRequest;
 use YummiPizza\Repositories\PizzaRepository;
 
 class BrowseHandler extends Handler
@@ -15,6 +15,6 @@ class BrowseHandler extends Handler
     {
         $collection = PizzaCollection::make($repository->browse($request));
 
-        return $this->successCollectionResponse($collection);
+        return $this->successResourceResponse($collection);
     }
 }

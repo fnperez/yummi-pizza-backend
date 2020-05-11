@@ -6,8 +6,9 @@ namespace App\Infrastructure\Repositories;
 
 use YummiPizza\Contracts\ICriteria;
 use YummiPizza\Entities\Pizza;
+use YummiPizza\Repositories\PizzaRepository;
 
-class EloquentPizzaReadRepository extends EloquentReadRepository
+class EloquentPizzaReadRepository extends EloquentReadRepository implements PizzaRepository
 {
     protected function getEntity(): string
     {

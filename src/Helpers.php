@@ -24,14 +24,30 @@ class Helpers
         return new Money($amount, new Currency(self::parseCurrency($currency)));
     }
 
+    public static function formatMoney(Money $money): float
+    {
+        $amount = $money->getAmount();
+
+        return $amount / 100;
+    }
+
     private static function parseCurrency(string $currency = null): string
     {
-        $currency = strtoupper($currency);
+        $default = config('currency.default');
 
-        $supported = config('currency.supported');
+        $currency = strtoupper($currency ?? $default);
 
-        !in_array($currency, $supported) && $currency = config('currency.default'); // use default
+        $supported = config('currency.currencies');
+
+        !in_array($currency, $supported) && $currency = $default; // use default
 
         return $currency;
+    }
+
+    public static function convertToMoney(float $price)
+    {
+        $amount = $price * 100;
+
+        return self::getMoney((string) $amount);
     }
 }

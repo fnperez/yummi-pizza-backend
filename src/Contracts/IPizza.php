@@ -12,4 +12,8 @@ interface IPizza extends IEntity, IHasTimestamps
     public function getName(): string;
     public function getDescription(): string;
     public function getPrice(): Money;
+    public function setImageUrl(string $imageUrl): void;
+    public function setName(string $name): void;
+    public function setDescription(string $description): void;
+    public function setPrice(Money $price): void;
 }

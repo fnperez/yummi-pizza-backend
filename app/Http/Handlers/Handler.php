@@ -15,9 +15,4 @@ class Handler extends BaseHandler
     {
         return response()->apiResourceResponse($resource, 200);
     }
-
-    protected function successCollectionResponse($resource)
-    {
-        return response()->apiCollectionResponse($resource, 200);
-    }
 }

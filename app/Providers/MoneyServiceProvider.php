@@ -19,10 +19,10 @@ class MoneyServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $exchange = new FixedExchange(config('currency.exchanges'));
+        $this->app->bind(IMoneyConverter::class, function() {
+            $exchange = new FixedExchange(config('currency.exchanges'));
 
-        $converter = new Converter(new ISOCurrencies(), $exchange);
-
-        $this->app->bind(IMoneyConverter::class, $converter);
+            return new Converter(new ISOCurrencies(), $exchange);
+        });
     }
 }

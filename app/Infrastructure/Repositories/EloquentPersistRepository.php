@@ -16,7 +16,9 @@ class EloquentPersistRepository implements PersistRepository
      */
     public function save($entity)
     {
-        return $entity->save();
+        $entity->save();
+
+        return $entity->fresh();
     }
 
     /**

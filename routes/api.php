@@ -23,12 +23,15 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('auth/me', \App\Http\Handlers\Auth\MeHandler::class);
 
-    Route::patch('account/profile', \App\Http\Handlers\Account\EditProfileHandler::class);
+    Route::put('account/profile', \App\Http\Handlers\Account\EditProfileHandler::class);
     Route::patch('account/password', \App\Http\Handlers\Account\EditPasswordHandler::class);
 });
 
+/** Auth routes */
 Route::post('auth/login', \App\Http\Handlers\Auth\LoginHandler::class.'@login');
 Route::post('auth/register', \App\Http\Handlers\Auth\RegisterHandler::class);
 
-Route::post('password/email', \App\Http\Handlers\Auth\ForgotPasswordHandler::class . '@sendResetLinkEmail');
-Route::post('password/reset', \App\Http\Handlers\Auth\ResetPasswordHandler::class . '@reset');
+Route::group(['prefix' => 'pizzas'], function() {
+    Route::get('/', \App\Http\Handlers\Pizza\BrowseHandler::class);
+    Route::post('/', \App\Http\Handlers\Pizza\AddHandler::class);
+});
