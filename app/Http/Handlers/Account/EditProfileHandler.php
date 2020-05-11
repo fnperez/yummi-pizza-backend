@@ -3,7 +3,7 @@
 namespace App\Http\Handlers\Account;
 
 use App\Http\Handlers\Handler;
-use App\Http\Requests\Account\EditProfileRequest;
+use App\Http\Requests\Invoice\EditProfileRequest;
 use App\Http\Resources\UserResource as UserResource;
 use YummiPizza\Services\UserService;
 

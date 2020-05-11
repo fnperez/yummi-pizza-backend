@@ -36,6 +36,10 @@ class ApiResponseServiceProvider extends ServiceProvider
         $factory->macro('apiResourceResponse', function ($data = null, $status = 200) use ($factory) {
             return $factory->json(['data' => $data], $status);
         });
+
+        $factory->macro('apiCollectionResponse', function ($data = null, $status = 200) use ($factory) {
+            return $factory->json($data, $status);
+        });
     }
 
     /**

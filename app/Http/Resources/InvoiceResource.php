@@ -15,9 +15,9 @@ class InvoiceResource extends JsonResource
             'sub_total' => CurrencyResource::make($this->getSubTotal()),
             'delivery_cost' => CurrencyResource::make($this->getDeliveryCost()),
             'total_price' => CurrencyResource::make($this->getTotalPrice()),
-            'customer' => UserResource::make($this->whenLoaded('user')),
-            'address' => AddressResource::make($this->whenLoaded('address')),
-            'cart' => CartResource::make($this->whenLoaded('cart')),
+            'customer' => UserResource::make($this->user),
+            'address' => AddressResource::make($this->address),
+            'items' => CartItemResource::collection($this->cart->items),
             'created_at' => $this->getCreatedAt(),
             'updated_at' => $this->getUpdatedAt(),
         ];

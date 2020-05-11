@@ -9,6 +9,7 @@ use YummiPizza\Contracts\ICart;
 use YummiPizza\Contracts\ICriteria;
 use YummiPizza\Contracts\IInvoice;
 use YummiPizza\Entities\Invoice;
+use YummiPizza\Repositories\Criteria\Invoice\InvoiceFilter;
 use YummiPizza\Repositories\InvoiceRepository;
 
 class EloquentInvoiceReadRepository extends EloquentReadRepository implements InvoiceRepository
@@ -20,7 +21,27 @@ class EloquentInvoiceReadRepository extends EloquentReadRepository implements In
 
     public function browse(ICriteria $criteria)
     {
-        return $this->all();
+        $query = $this->query();
+
+        foreach ($criteria->getFilter()->values() as $key => $value) {
+            switch ($key) {
+                case InvoiceFilter::CUSTOMER_ID:
+                    $query->where('customer_id', $value);
+                break;
+                case InvoiceFilter::STATUS:
+                    $query->where('status', $value);
+                break;
+            }
+        }
+
+        foreach ($criteria->getSorting()->getRaw() as $column => $direction) {
+            $query->orderBy($column, $direction);
+        }
+
+        $query->setPerPage($criteria->getPaginationData()->getLimit());
+        $query->offset($criteria->getPaginationData()->getOffset());
+
+        return $query->paginate();
     }
 
     public function findByCart(ICart $cart): ?IInvoice

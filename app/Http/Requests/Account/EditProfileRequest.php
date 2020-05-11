@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Account;
+namespace App\Http\Requests\Invoice;
 
 use Illuminate\Foundation\Http\FormRequest;
 use YummiPizza\Contracts\IUser;

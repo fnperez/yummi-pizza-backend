@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Handlers\Account;
 
 use App\Http\Handlers\Handler;
-use App\Http\Requests\Account\EditPasswordRequest;
+use App\Http\Requests\Invoice\EditPasswordRequest;
 use App\Http\Resources\UserResource;
 use YummiPizza\Services\UserService;
 
