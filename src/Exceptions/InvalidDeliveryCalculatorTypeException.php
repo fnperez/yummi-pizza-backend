@@ -29,6 +29,8 @@ class InvalidDeliveryCalculatorTypeException extends \Exception
 
     public function report()
     {
-        logger()->error($this->getTraceAsString());
+        logger()->error($this->getTraceAsString(), [
+            'type' => $this->type,
+        ]);
     }
 }

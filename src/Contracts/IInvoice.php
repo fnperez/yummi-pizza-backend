@@ -16,6 +16,7 @@ interface IInvoice extends IEntity, IHasTimestamps
     public function getCart(): ICart;
     public function getAddress(): IAddress;
     public function getStatus(): InvoiceStatus;
+    public function isStatus(string $status): bool;
 
     public function setSubTotal(Money $subTotal): void;
     public function setDeliveryCost(Money $deliveryCost): void;

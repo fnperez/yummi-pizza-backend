@@ -24,7 +24,7 @@ abstract class EloquentReadRepository implements ReadRepository
         return $this->query()->all();
     }
 
-    private function query(): Model
+    protected function query(): Model
     {
         return app($this->getEntity());
     }

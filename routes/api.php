@@ -46,11 +46,11 @@ Route::group(['prefix' => 'carts'], function() {
 });
 
 Route::group(['prefix' => 'cart_items'], function() {
-    Route::post('/', \App\Http\Handlers\CartItem\AddHandler::class);
-    Route::put('{id}', \App\Http\Handlers\CartItem\EditHandler::class);
+    Route::post('/', \App\Http\Handlers\CartItem\AddHandler::class)->middleware('app.check-cart');
+    Route::put('{id}', \App\Http\Handlers\CartItem\EditHandler::class)->middleware('app.check-cart-item');
 });
 
 Route::group(['prefix' => 'invoices'], function() {
-    Route::post('/', \App\Http\Handlers\Invoice\AddHandler::class);
+    Route::post('/', \App\Http\Handlers\Invoice\AddHandler::class)->middleware('app.check-cart');
     Route::post('{id}/pay', \App\Http\Handlers\Invoice\PayHandler::class);
 });

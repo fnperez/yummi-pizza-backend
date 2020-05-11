@@ -30,6 +30,8 @@ class AlreadyPayedInvoiceException extends \Exception
 
     public function report()
     {
-        logger()->error($this->getTraceAsString());
+        logger()->error($this->getTraceAsString(), [
+            'invoice' => $this->invoice->getId()
+        ]);
     }
 }

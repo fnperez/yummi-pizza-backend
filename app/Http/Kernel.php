@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckCartItemMiddleware;
+use App\Http\Middleware\CheckCartMiddleware;
 use App\Http\Middleware\JsonMiddleware;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -56,6 +58,8 @@ class Kernel extends HttpKernel
         'app.etags' => \App\Http\Middleware\ETagsMiddleware::class,
         'app.cors' => \App\Http\Middleware\CorsMiddleware::class,
         'app.return-json' => JsonMiddleware::class,
+        'app.check-cart' => CheckCartMiddleware::class,
+        'app.check-cart-item' => CheckCartItemMiddleware::class,
 
     ];
 

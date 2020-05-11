@@ -79,6 +79,11 @@ class Invoice extends Model implements IInvoice
         return InvoiceStatus::make($this->status, $this);
     }
 
+    public function isStatus(string $status): bool
+    {
+        return $this->status === $status;
+    }
+
     public function setStatus(InvoiceStatus $status): void
     {
         $this->status = $status->id();

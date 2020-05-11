@@ -28,5 +28,9 @@ return [
     'already_payed' => [
         'message' => 'Invoice is already payed',
         'description' => 'Invoice :invoice is already payed'
+    ],
+    'cart_already_used' => [
+        'message' => 'The cart has been used already',
+        'description' => 'The cart :cart is used in payed invoice :invoice.'
     ]
 ];
