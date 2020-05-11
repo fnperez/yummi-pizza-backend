@@ -9,6 +9,7 @@ use Illuminate\Http\UploadedFile;
 use Money\Currency;
 use Money\Money;
 use Money\Parser\DecimalMoneyParser;
+use YummiPizza\Entities\User;
 use YummiPizza\Helpers;
 use YummiPizza\Payloads\Pizza\AddPayload;
 
@@ -22,6 +23,11 @@ class AddRequest extends FormRequest implements AddPayload
             'price' => 'required|numeric|min:1',
             'image' => 'file|mimes:jpeg,bmp,png',
         ];
+    }
+
+    public function authorize()
+    {
+        return $this->user()->isRole(User::ADMIN);
     }
 
     public function getName(): string

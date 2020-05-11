@@ -12,6 +12,9 @@ use YummiPizza\Traits\HasTimestamps;
 
 class User extends Authenticatable implements JWTSubject, IUser
 {
+    public const ADMIN = 'admin';
+    public const CLIENT = 'client';
+
     use Notifiable, HasTimestamps;
 
     /**
@@ -113,5 +116,10 @@ class User extends Authenticatable implements JWTSubject, IUser
     public function getVerifiedAt():? Carbon
     {
         return $this->email_verified_at;
+    }
+
+    public function isRole(string $role): bool
+    {
+        return $this->role === $role;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
@@ -59,6 +60,7 @@ class Handler extends ExceptionHandler
             case $exception instanceof ModelNotFoundException:
             case $exception instanceof NotFoundHttpException:
                 return response()->apiError(404, trans('exceptions.404.message'), $exception->getMessage());
+            case $exception instanceof AuthorizationException:
             case $exception instanceof AccessDeniedHttpException:
                 return response()->apiError(403, trans('exceptions.403.message'), trans('exceptions.403.description'));
             case $exception instanceof ValidationException:

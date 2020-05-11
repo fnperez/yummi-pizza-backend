@@ -33,5 +33,5 @@ Route::post('auth/register', \App\Http\Handlers\Auth\RegisterHandler::class);
 
 Route::group(['prefix' => 'pizzas'], function() {
     Route::get('/', \App\Http\Handlers\Pizza\BrowseHandler::class);
-    Route::post('/', \App\Http\Handlers\Pizza\AddHandler::class);
+    Route::post('/', \App\Http\Handlers\Pizza\AddHandler::class)->middleware('auth:api');
 });
