@@ -15,68 +15,68 @@ class Address extends Model implements IAddress
 
     public $incrementing = false;
 
-    public function getStreetAddress(): string
+    public function getId(): string
     {
-        // TODO: Implement getStreetAddress() method.
+        return $this->id;
     }
 
-    public function getZipCode(): string
+    public function getStreetName(): string
     {
-        // TODO: Implement getZipCode() method.
+        return $this->street_name;
     }
 
-    public function getHouseNumber(): int
+    public function getStreetNumber(): string
     {
-        // TODO: Implement getHouseNumber() method.
+        return $this->street_number;
+    }
+
+    public function getFloor(): ?string
+    {
+        return $this->floor;
     }
 
     public function getState(): string
     {
-        // TODO: Implement getState() method.
+        return $this->state;
     }
 
     public function getCity(): string
     {
-        // TODO: Implement getCity() method.
+        return $this->city;
     }
 
     public function getPhoneNumber(): string
     {
-        // TODO: Implement getPhoneNumber() method.
+        return $this->phone_number;
     }
 
-    public function setStreetAddress(string $streetAddress): void
+    public function setStreetName(string $streetName): void
     {
-        // TODO: Implement setStreetAddress() method.
+        $this->street_name = $streetName;
     }
 
-    public function setZipCode(string $zipCode): void
+    public function setStreetNumber(string $streetNumber): void
     {
-        // TODO: Implement setZipCode() method.
+        $this->street_number = $streetNumber;
     }
 
-    public function setHouseNumber(int $houseNumber): void
+    public function setFloor(string $floor): void
     {
-        // TODO: Implement setHouseNumber() method.
+        $this->floor = $floor;
     }
 
     public function setState(string $state): void
     {
-        // TODO: Implement setState() method.
+        $this->state = $state;
     }
 
     public function setCity(string $city): void
     {
-        // TODO: Implement setCity() method.
+        $this->city = $city;
     }
 
     public function setPhoneNumber(string $phoneNumber): void
     {
-        // TODO: Implement setPhoneNumber() method.
-    }
-
-    public function getId(): string
-    {
-        // TODO: Implement getId() method.
+        $this->phone_number = $phoneNumber;
     }
 }
