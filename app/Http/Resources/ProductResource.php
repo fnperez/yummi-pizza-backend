@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use YummiPizza\Entities\Pizza;
+use YummiPizza\Entities\Product;
 use YummiPizza\Helpers;
 
-class PizzaResource extends JsonResource
+class ProductResource extends JsonResource
 {
 
     /**

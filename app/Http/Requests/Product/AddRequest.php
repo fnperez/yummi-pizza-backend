@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests\Pizza;
+namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\UploadedFile;
@@ -11,7 +11,7 @@ use Money\Money;
 use Money\Parser\DecimalMoneyParser;
 use YummiPizza\Entities\User;
 use YummiPizza\Helpers;
-use YummiPizza\Payloads\Pizza\AddPayload;
+use YummiPizza\Payloads\Product\AddPayload;
 
 class AddRequest extends FormRequest implements AddPayload
 {
@@ -47,7 +47,7 @@ class AddRequest extends FormRequest implements AddPayload
         return Helpers::convertToMoney((float) $price);
     }
 
-    public function getImage(): UploadedFile
+    public function getImage():? UploadedFile
     {
         return $this->file('image');
     }

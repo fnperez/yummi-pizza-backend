@@ -6,11 +6,12 @@ namespace YummiPizza\Contracts;
 
 use Money\Money;
 
-interface IItem extends IEntity, IHasTimestamps
+interface ICartItem extends IEntity, IHasTimestamps
 {
     public function getName(): string;
     public function getPrice(): Money;
     public function getQuantity(): int;
+    public function getTotalPrice(): Money;
 
     public function setName(string $name): string;
     public function setPrice(Money $price): Money;

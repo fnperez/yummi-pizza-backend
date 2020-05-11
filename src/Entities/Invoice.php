@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Money\Money;
 use YummiPizza\Contracts\IAddress;
 use YummiPizza\Contracts\IInvoice;
-use YummiPizza\Contracts\IItem;
+use YummiPizza\Contracts\ICartItem;
 use YummiPizza\Contracts\IUser;
 use YummiPizza\Traits\HasTimestamps;
 use YummiPizza\Traits\UuidGenerator;
@@ -18,6 +18,7 @@ class Invoice extends Model implements IInvoice
     use HasTimestamps, UuidGenerator;
 
     public $incrementing = false;
+    public $keyType = 'string';
 
     public function getId(): string
     {

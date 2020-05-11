@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPizzaTable extends Migration
+class CreateItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,18 @@ class AddPizzaTable extends Migration
      */
     public function up()
     {
-        Schema::create('pizzas', function (Blueprint $table) {
+        Schema::create('cart_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
-
-            $table->string('image_url')->default(asset(config('images.covers.pizza')));
             $table->string('name');
             $table->text('description');
             $table->string('price')->default('0');
+            $table->uuid('cart_id');
             $table->timestamps();
+
+            $table->foreign('cart_id')
+                ->references('id')
+                ->on('carts')
+                ->onDelete('cascade');
         });
     }
 
@@ -31,6 +35,6 @@ class AddPizzaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pizzas');
+        Schema::dropIfExists('items');
     }
 }

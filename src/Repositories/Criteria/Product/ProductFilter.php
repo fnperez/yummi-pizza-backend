@@ -6,7 +6,7 @@ namespace YummiPizza\Repositories\Criteria\Pizza;
 
 use YummiPizza\Utils\Filter;
 
-class PizzaFilter extends Filter
+class ProductFilter extends Filter
 {
     public const NAME = 'name';
 }

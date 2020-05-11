@@ -6,7 +6,7 @@ namespace YummiPizza\Contracts;
 
 use Money\Money;
 
-interface IPizza extends IEntity, IHasTimestamps
+interface IProduct extends IEntity, IHasTimestamps
 {
     public function getImageUrl(): string;
     public function getName(): string;

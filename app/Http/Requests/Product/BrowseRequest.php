@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests\Pizza;
+namespace App\Http\Requests\Product;
 
 use App\Http\Requests\CriteriaRequest;
-use YummiPizza\Repositories\Criteria\Pizza\PizzaFilter;
-use YummiPizza\Repositories\Criteria\Pizza\PizzaSorting;
+use YummiPizza\Repositories\Criteria\Pizza\ProductFilter;
+use YummiPizza\Repositories\Criteria\Pizza\ProductSorting;
 
 class BrowseRequest extends CriteriaRequest
 {
     protected function getFilterClass(): string
     {
-        return PizzaFilter::class;
+        return ProductFilter::class;
     }
 
     protected function getSortingClass(): string
     {
-        return PizzaSorting::class;
+        return ProductSorting::class;
     }
 }

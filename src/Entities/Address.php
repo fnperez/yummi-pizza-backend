@@ -14,6 +14,7 @@ class Address extends Model implements IAddress
     use HasTimestamps, UuidGenerator;
 
     public $incrementing = false;
+    public $keyType = 'string';
 
     public function getId(): string
     {

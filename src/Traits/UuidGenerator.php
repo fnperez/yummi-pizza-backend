@@ -8,7 +8,6 @@ use Ramsey\Uuid\Uuid;
 
 trait UuidGenerator
 {
-
     /**
      * Boot function from laravel.
      */

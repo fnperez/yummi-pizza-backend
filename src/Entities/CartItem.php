@@ -6,15 +6,16 @@ namespace YummiPizza\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Money\Money;
-use YummiPizza\Contracts\IItem;
+use YummiPizza\Contracts\ICartItem;
 use YummiPizza\Traits\HasTimestamps;
 use YummiPizza\Traits\UuidGenerator;
 
-class Item extends Model implements IItem
+class CartItem extends Model implements ICartItem
 {
     use HasTimestamps, UuidGenerator;
 
     public $incrementing = false;
+    public $keyType = 'string';
 
     public function getId(): string
     {
@@ -49,5 +50,10 @@ class Item extends Model implements IItem
     public function setQuantity(int $quantity): int
     {
         // TODO: Implement setQuantity() method.
+    }
+
+    public function getTotalPrice(): Money
+    {
+        // TODO: Implement getTotalPrice() method.
     }
 }

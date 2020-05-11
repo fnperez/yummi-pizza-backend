@@ -31,11 +31,17 @@ Route::group(['middleware' => 'auth:api'], function () {
 Route::post('auth/login', \App\Http\Handlers\Auth\LoginHandler::class.'@login');
 Route::post('auth/register', \App\Http\Handlers\Auth\RegisterHandler::class);
 
-Route::group(['prefix' => 'pizzas'], function() {
-    Route::get('/', \App\Http\Handlers\Pizza\BrowseHandler::class);
-    Route::post('/', \App\Http\Handlers\Pizza\AddHandler::class)->middleware('auth:api');
+Route::group(['prefix' => 'products'], function() {
+    Route::get('/', \App\Http\Handlers\Product\BrowseHandler::class);
+    Route::post('/', \App\Http\Handlers\Product\AddHandler::class)->middleware('auth:api');
 });
 
 Route::group(['prefix' => 'addresses'], function() {
     Route::post('/', \App\Http\Handlers\Address\AddHandler::class);
+});
+
+
+Route::group(['prefix' => 'carts'], function() {
+    Route::post('/', \App\Http\Handlers\Cart\AddHandler::class);
+    Route::get('{id}', \App\Http\Handlers\Cart\ReadHandler::class);
 });

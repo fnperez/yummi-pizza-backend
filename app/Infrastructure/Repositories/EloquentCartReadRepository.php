@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Infrastructure\Repositories;
 
 use YummiPizza\Contracts\ICriteria;
-use YummiPizza\Entities\Pizza;
-use YummiPizza\Repositories\PizzaRepository;
+use YummiPizza\Entities\Cart;
+use YummiPizza\Repositories\CartRepository;
 
-class EloquentPizzaReadRepository extends EloquentReadRepository implements PizzaRepository
+class EloquentCartReadRepository extends EloquentReadRepository implements CartRepository
 {
     protected function getEntity(): string
     {
-        return Pizza::class;
+        return Cart::class;
     }
 
     public function browse(ICriteria $criteria)

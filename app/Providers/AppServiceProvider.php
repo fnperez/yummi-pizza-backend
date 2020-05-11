@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Infrastructure\Repositories\EloquentCartReadRepository;
 use App\Infrastructure\Repositories\EloquentPersistRepository;
-use App\Infrastructure\Repositories\EloquentPizzaReadRepository;
+use App\Infrastructure\Repositories\EloquentProductReadRepository;
 use Illuminate\Support\ServiceProvider;
+use YummiPizza\Repositories\CartRepository;
 use YummiPizza\Repositories\PersistRepository;
-use YummiPizza\Repositories\PizzaRepository;
+use YummiPizza\Repositories\ProductRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,7 +20,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(PersistRepository::class, EloquentPersistRepository::class);
-        $this->app->bind(PizzaRepository::class, EloquentPizzaReadRepository::class);
+        $this->app->bind(ProductRepository::class, EloquentProductReadRepository::class);
+        $this->app->bind(CartRepository::class, EloquentCartReadRepository::class);
     }
 
     /**

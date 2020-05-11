@@ -6,16 +6,17 @@ namespace YummiPizza\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Money\Money;
-use YummiPizza\Contracts\IPizza;
+use YummiPizza\Contracts\IProduct;
 use YummiPizza\Helpers;
 use YummiPizza\Traits\HasTimestamps;
 use YummiPizza\Traits\UuidGenerator;
 
-class Pizza extends Model implements IPizza
+class Product extends Model implements IProduct
 {
     use HasTimestamps, UuidGenerator;
 
     public $incrementing = false;
+    public $keyType = 'string';
 
     public function getId(): string
     {
