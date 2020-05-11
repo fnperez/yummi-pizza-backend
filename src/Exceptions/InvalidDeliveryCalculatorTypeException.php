@@ -24,7 +24,7 @@ class InvalidDeliveryCalculatorTypeException extends \Exception
     {
         return response()->apiError(500, trans('exceptions.invalid_delivery_type.message'), trans('exceptions.invalid_delivery_type.description', [
             'type' => $this->type,
-        ]));
+        ]), config('error-codes.invalid-calculator'));
     }
 
     public function report()

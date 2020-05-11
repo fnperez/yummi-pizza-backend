@@ -31,7 +31,7 @@ class CartAlreadyUsedException extends \Exception
         return response()->apiError(400, trans('exceptions.cart_already_used.message'), trans('exceptions.cart_already_used.description', [
             'invoice' => $this->invoice->getId(),
             'cart' => $this->cart->getId(),
-        ]));
+        ]), config('error-codes.cart-used'));
     }
 
     public function report()
