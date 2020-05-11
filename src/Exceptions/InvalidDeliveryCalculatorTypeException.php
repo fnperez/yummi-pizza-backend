@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace YummiPizza\Exceptions;
 
 use Throwable;
+use YummiPizza\ErrorCodes;
 
 class InvalidDeliveryCalculatorTypeException extends \Exception
 {
@@ -24,7 +25,7 @@ class InvalidDeliveryCalculatorTypeException extends \Exception
     {
         return response()->apiError(500, trans('exceptions.invalid_delivery_type.message'), trans('exceptions.invalid_delivery_type.description', [
             'type' => $this->type,
-        ]), config('error-codes.invalid-calculator'));
+        ]), ErrorCodes::INVALID_CALCULATOR_TYPE);
     }
 
     public function report()

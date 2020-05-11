@@ -6,6 +6,7 @@ namespace YummiPizza\Exceptions;
 
 use Throwable;
 use YummiPizza\Contracts\IInvoice;
+use YummiPizza\ErrorCodes;
 
 class AlreadyPayedInvoiceException extends \Exception
 {
@@ -25,7 +26,7 @@ class AlreadyPayedInvoiceException extends \Exception
     {
         return response()->apiError(400, trans('exceptions.already_payed.message'), trans('exceptions.already_payed.description', [
             'invoice' => $this->invoice->getId()
-        ]), config('error-codes.invoice-payed'));
+        ]), ErrorCodes::INVOICE_ALREADY_PAYED);
     }
 
     public function report()
