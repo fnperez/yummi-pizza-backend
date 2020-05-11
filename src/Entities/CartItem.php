@@ -6,7 +6,10 @@ namespace YummiPizza\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Money\Money;
+use YummiPizza\Contracts\ICart;
 use YummiPizza\Contracts\ICartItem;
+use YummiPizza\Contracts\IProduct;
+use YummiPizza\Helpers;
 use YummiPizza\Traits\HasTimestamps;
 use YummiPizza\Traits\UuidGenerator;
 
@@ -17,43 +20,81 @@ class CartItem extends Model implements ICartItem
     public $incrementing = false;
     public $keyType = 'string';
 
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class, 'cart_id');
+    }
+
     public function getId(): string
     {
-        // TODO: Implement getId() method.
+        return $this->getKey();
     }
 
     public function getName(): string
     {
-        // TODO: Implement getName() method.
+        return $this->name;
     }
 
     public function getPrice(): Money
     {
-        // TODO: Implement getPrice() method.
+        return Helpers::getMoney($this->price);
     }
 
     public function getQuantity(): int
     {
-        // TODO: Implement getQuantity() method.
+        return $this->quantity;
     }
 
-    public function setName(string $name): string
+    public function getCart(): ICart
     {
-        // TODO: Implement setName() method.
+        return $this->cart;
     }
 
-    public function setPrice(Money $price): Money
+    public function getDescription(): string
     {
-        // TODO: Implement setPrice() method.
+        return $this->description;
     }
 
-    public function setQuantity(int $quantity): int
+    public function setName(string $name): void
     {
-        // TODO: Implement setQuantity() method.
+        $this->name = $name;
+    }
+
+    public function setPrice(Money $price): void
+    {
+        $this->price = $price->getAmount();
+    }
+
+    public function setQuantity(int $quantity): void
+    {
+        $this->quantity = $quantity;
+    }
+
+    public function setCart(ICart $cart): void
+    {
+        $this->cart()->associate($cart);
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
     }
 
     public function getTotalPrice(): Money
     {
-        // TODO: Implement getTotalPrice() method.
+        return $this->getPrice()->multiply($this->getQuantity());
+    }
+
+    public static function make(IProduct $product, ICart $cart, int $quantity = 1): ICartItem
+    {
+        $item = new static;
+
+        $item->setName($product->getName());
+        $item->setPrice($product->getPrice());
+        $item->setDescription($product->getDescription());
+        $item->setQuantity($quantity);
+        $item->setCart($cart);
+
+        return $item;
     }
 }

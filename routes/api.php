@@ -40,8 +40,12 @@ Route::group(['prefix' => 'addresses'], function() {
     Route::post('/', \App\Http\Handlers\Address\AddHandler::class);
 });
 
-
 Route::group(['prefix' => 'carts'], function() {
     Route::post('/', \App\Http\Handlers\Cart\AddHandler::class);
     Route::get('{id}', \App\Http\Handlers\Cart\ReadHandler::class);
+});
+
+Route::group(['prefix' => 'cart_items'], function() {
+    Route::post('/', \App\Http\Handlers\CartItem\AddHandler::class);
+    Route::put('{id}', \App\Http\Handlers\CartItem\EditHandler::class);
 });

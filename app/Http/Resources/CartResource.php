@@ -15,12 +15,8 @@ class CartResource extends JsonResource
 
         return [
             'id' => $this->getId(),
-            'items' => ItemResource::collection($this->whenLoaded('items')),
-            'price' => Helpers::formatMoney($totalPrice),
-            'currencies' => [
-                'usd' => Helpers::formatMoney(Helpers::convertCurrency($totalPrice, 'usd')),
-                'eur' => Helpers::formatMoney(Helpers::convertCurrency($totalPrice, 'eur')),
-            ],
+            'items' => CartItemResource::collection($this->whenLoaded('items')),
+            'price' => CurrencyResource::make($totalPrice),
         ];
     }
 }

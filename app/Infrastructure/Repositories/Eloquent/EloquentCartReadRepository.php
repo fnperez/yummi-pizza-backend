@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Repositories;
+namespace App\Infrastructure\Repositories\Eloquent;
 
 use YummiPizza\Contracts\ICriteria;
 use YummiPizza\Entities\Cart;

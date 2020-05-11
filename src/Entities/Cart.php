@@ -53,7 +53,7 @@ class Cart extends Model implements ICart
         $price = Money::USD(0);
 
         foreach ($this->getItems() as $item) {
-            $price->add($item->getTotalPrice());
+            $price = $price->add($item->getTotalPrice());
         }
 
         return $price;

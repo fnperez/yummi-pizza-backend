@@ -23,14 +23,10 @@ class ProductResource extends JsonResource
             'id'    => $this->getId(),
             'name'  => $this->getName(),
             'description' => $this->getDescription(),
-            'price' => Helpers::formatMoney($this->getPrice()),
+            'price' => CurrencyResource::make($this->getPrice()),
             'image_url' => $this->getImageUrl(),
             'created_at' => $this->getCreatedAt()->format('Y-m-d'),
             'updated_at' => $this->getUpdatedAt()->format('Y-m-d'),
-            'currencies' => [
-                'usd' => Helpers::formatMoney(Helpers::convertCurrency($this->getPrice(), 'usd')),
-                'eur' => Helpers::formatMoney(Helpers::convertCurrency($this->getPrice(), 'eur')),
-            ],
         ];
     }
 }

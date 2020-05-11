@@ -18,6 +18,7 @@ class CreateItemsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('price')->default('0');
+            $table->integer('quantity')->default(1);
             $table->uuid('cart_id');
             $table->timestamps();
 

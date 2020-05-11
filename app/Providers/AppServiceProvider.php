@@ -2,16 +2,25 @@
 
 namespace App\Providers;
 
-use App\Infrastructure\Repositories\EloquentCartReadRepository;
-use App\Infrastructure\Repositories\EloquentPersistRepository;
-use App\Infrastructure\Repositories\EloquentProductReadRepository;
+use App\Infrastructure\Repositories\Eloquent\EloquentCartItemReadRepository;
+use App\Infrastructure\Repositories\Eloquent\EloquentCartReadRepository;
+use App\Infrastructure\Repositories\Eloquent\EloquentPersistRepository;
+use App\Infrastructure\Repositories\Eloquent\EloquentProductReadRepository;
 use Illuminate\Support\ServiceProvider;
+use YummiPizza\Repositories\CartItemRepository;
 use YummiPizza\Repositories\CartRepository;
 use YummiPizza\Repositories\PersistRepository;
 use YummiPizza\Repositories\ProductRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public $singletons = [
+        PersistRepository::class => EloquentPersistRepository::class,
+        ProductRepository::class => EloquentProductReadRepository::class,
+        CartRepository::class => EloquentCartReadRepository::class,
+        CartItemRepository::class => EloquentCartItemReadRepository::class,
+    ];
+
     /**
      * Register any application services.
      *
@@ -19,9 +28,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(PersistRepository::class, EloquentPersistRepository::class);
-        $this->app->bind(ProductRepository::class, EloquentProductReadRepository::class);
-        $this->app->bind(CartRepository::class, EloquentCartReadRepository::class);
+        foreach ($this->singletons as $abstract => $concrete) {
+            $this->app->singleton($abstract, $concrete);
+        }
     }
 
     /**
