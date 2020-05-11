@@ -22,7 +22,7 @@ class AccountTest extends TestCase
     public function update_profile_info()
     {
         $this->actingAs($this->user)
-            ->patchJson('/account/profile', [
+            ->patchJson('/api/account/profile', [
                 'name' => 'Test User',
                 'email' => 'test@test.app',
             ])
@@ -42,7 +42,7 @@ class AccountTest extends TestCase
         $userExisting = factory(User::class)->create();
 
         $this->actingAs($this->user)
-            ->patchJson('/account/profile', [])
+            ->patchJson('/api/account/profile', [])
             ->assertStatus(422)
             ->assertJsonValidationErrors(['name', 'email']);
     }
@@ -53,7 +53,7 @@ class AccountTest extends TestCase
         $userExisting = factory(User::class)->create();
 
         $this->actingAs($this->user)
-            ->patchJson('/account/profile', [
+            ->patchJson('/api/account/profile', [
                 'name' => 'Test User',
                 'email' => $userExisting->email,
             ])
@@ -65,7 +65,7 @@ class AccountTest extends TestCase
     public function update_password()
     {
         $this->actingAs($this->user)
-            ->patchJson('/account/password', [
+            ->patchJson('/api/account/password', [
                 'password' => 'updated-password',
                 'password_confirmation' => 'updated-password',
             ])
@@ -78,7 +78,7 @@ class AccountTest extends TestCase
     public function can_not_update_password_unconfirmed()
     {
         $this->actingAs($this->user)
-            ->patchJson('/account/password', [
+            ->patchJson('/api/account/password', [
                 'password' => '123',
             ])
             ->assertStatus(422)
@@ -89,7 +89,7 @@ class AccountTest extends TestCase
     public function can_not_update_password_minimum()
     {
         $this->actingAs($this->user)
-            ->patchJson('/account/password', [
+            ->patchJson('/api/account/password', [
                 'password' => '123',
                 'password_confirmation' => '123',
             ])

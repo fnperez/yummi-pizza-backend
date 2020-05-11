@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace YummiPizza\Services;
 
+use Illuminate\Auth\Events\Registered;
 use YummiPizza\Contracts\IUser;
 use YummiPizza\Payloads\Account\EditPasswordPayload;
 use YummiPizza\Entities\User;
 use YummiPizza\Payloads\Account\EditProfilePayload;
+use YummiPizza\Payloads\Auth\RegisterPayload;
 use YummiPizza\Repositories\PersistRepository;
 
 class UserService
@@ -50,6 +52,20 @@ class UserService
             $user->markEmailAsUnverified();
             $user->sendEmailVerificationNotification();
         }
+
+        return $user;
+    }
+
+    public function register(RegisterPayload $payload): IUser
+    {
+        $user = new User;
+        $user->setEmail($payload->getEmail());
+        $user->setName($payload->getName());
+        $user->setPassword(\Hash::make($payload->getNewPassword()));
+
+        $this->repository->save($user);
+
+        event(new Registered($user));
 
         return $user;
     }

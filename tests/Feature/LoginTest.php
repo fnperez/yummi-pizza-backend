@@ -23,7 +23,7 @@ class LoginTest extends TestCase
      */
     public function authenticate()
     {
-        $this->postJson('/auth/login', [
+        $this->postJson('/api/auth/login', [
             'email' => $this->user->email,
             'password' => 'password',
         ])
@@ -36,7 +36,7 @@ class LoginTest extends TestCase
     public function fetch_the_current_user()
     {
         $this->actingAs($this->user)
-            ->getJson('/auth/me')
+            ->getJson('/api/auth/me')
             ->assertSuccessful()
             ->assertJsonStructure(['data' => ['id', 'name', 'email']]);
     }

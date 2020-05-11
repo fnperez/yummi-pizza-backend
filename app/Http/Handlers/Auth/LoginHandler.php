@@ -22,22 +22,6 @@ class LoginHandler extends Handler
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
 
     /**
      * Attempt to log the user into the application.
@@ -71,7 +55,7 @@ class LoginHandler extends Handler
         $token = (string) $this->guard()->getToken();
         $expiration = $this->guard()->getPayload()->get('exp');
 
-        return response()->json([
+        return $this->successResourceResponse([
             'token' => $token,
             'token_type' => 'bearer',
             'expires_in' => $expiration - time(),
@@ -91,16 +75,5 @@ class LoginHandler extends Handler
         throw ValidationException::withMessages([
             $this->username() => [trans('auth.failed')],
         ]);
-    }
-
-    /**
-     * Log the user out of the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function logout(Request $request)
-    {
-        $this->guard()->logout();
     }
 }

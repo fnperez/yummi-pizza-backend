@@ -12,7 +12,7 @@ class RegisterTest extends TestCase
     /** @test */
     public function can_register()
     {
-        $this->postJson('/auth/register', [
+        $this->postJson('/api/auth/register', [
             'name' => 'Test User',
             'email' => 'test@test.app',
             'password' => '12345678',
@@ -27,7 +27,7 @@ class RegisterTest extends TestCase
     {
         factory(User::class)->create(['email' => 'test@test.app']);
 
-        $this->postJson('/auth/register', [
+        $this->postJson('/api/auth/register', [
             'name' => 'Test User',
             'email' => 'test@test.app',
             'password' => '12345678',
@@ -40,7 +40,7 @@ class RegisterTest extends TestCase
     /** @test */
     public function can_not_register_empty_name()
     {
-        $this->postJson('/auth/register', [
+        $this->postJson('/api/auth/register', [
             'email' => 'test@test.app',
             'password' => '12345678',
             'password_confirmation' => '12345678',
@@ -52,7 +52,7 @@ class RegisterTest extends TestCase
     /** @test */
     public function can_not_register_password_minimum()
     {
-        $this->postJson('/auth/register', [
+        $this->postJson('/api/auth/register', [
             'name' => 'Test User',
             'email' => 'test@test.app',
             'password' => 'secret',

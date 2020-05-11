@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Handlers\Auth;
 
-
 use App\Http\Handlers\Handler;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
