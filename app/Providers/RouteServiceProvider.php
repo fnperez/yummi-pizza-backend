@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-            ->middleware(['app.return-json', 'app.locale', 'app.etags', 'app.cors'])
+            ->middleware([ 'app.return-json', 'app.locale', 'app.etags', 'app.cors'])
             ->group(base_path('routes/api.php'));
     }
 }

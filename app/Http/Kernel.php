@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\CheckCartItemMiddleware;
 use App\Http\Middleware\CheckCartMiddleware;
+use App\Http\Middleware\CorsMiddleware;
 use App\Http\Middleware\JsonMiddleware;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -23,6 +24,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        'app.cors',
     ];
 
     /**
@@ -60,7 +62,6 @@ class Kernel extends HttpKernel
         'app.return-json' => JsonMiddleware::class,
         'app.check-cart' => CheckCartMiddleware::class,
         'app.check-cart-item' => CheckCartItemMiddleware::class,
-
     ];
 
     /**
@@ -71,6 +72,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middlewarePriority = [
+        'app.cors',
         JsonMiddleware::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,

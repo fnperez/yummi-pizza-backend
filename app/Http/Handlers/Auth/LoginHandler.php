@@ -3,6 +3,7 @@
 namespace App\Http\Handlers\Auth;
 
 use App\Http\Handlers\Handler;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -65,15 +66,13 @@ class LoginHandler extends Handler
     /**
      * Get the failed login response instance.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws AuthenticationException
      */
     protected function sendFailedLoginResponse(Request $request)
     {
-        throw ValidationException::withMessages([
-            $this->username() => [trans('auth.failed')],
-        ]);
+        throw new AuthenticationException(trans('auth.failed'));
     }
 }

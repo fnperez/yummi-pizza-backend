@@ -66,7 +66,7 @@ class Handler extends ExceptionHandler
             case $exception instanceof ValidationException:
                 return response()->apiError(422, trans('validation.message'), $exception->errors());
             case $exception instanceof AuthenticationException:
-                return response()->apiError(401, trans('exceptions.401.message'), trans('exceptions.401.description'));
+                return response()->apiError(401, trans('exceptions.401.message'), $exception->getMessage() ?? trans('exceptions.401.description'));
         }
 
         return parent::render($request, $exception);
