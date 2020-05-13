@@ -5,7 +5,6 @@ namespace App\Http\Handlers\Auth;
 use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Handlers\Handler;
-use App\Http\Resources\UserResource as UserResource;
 use YummiPizza\Services\UserService;
 
 class RegisterHandler extends Handler
@@ -16,6 +15,13 @@ class RegisterHandler extends Handler
 
         Auth::guard()->login($user);
 
-        return $this->successResourceResponse(new UserResource($user));
+        $token = (string) Auth::guard()->getToken();
+        $expiration = Auth::guard()->getPayload()->get('exp');
+
+        return $this->successResourceResponse([
+            'token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => $expiration - time(),
+        ]);
     }
 }
