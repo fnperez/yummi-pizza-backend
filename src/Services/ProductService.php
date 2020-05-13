@@ -36,6 +36,8 @@ class ProductService
             $product->setImageUrl(asset($folder . $filename));
         }
 
+        $payload->getImageUrl() && $product->setImageUrl($payload->getImageUrl());
+
         $product->setName($payload->getName());
         $product->setDescription($payload->getDescription());
         $product->setPrice($payload->getPrice());

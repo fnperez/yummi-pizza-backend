@@ -22,6 +22,7 @@ class AddRequest extends FormRequest implements AddPayload
             'description' => 'required|min:20',
             'price' => 'required|numeric|min:1',
             'image' => 'file|mimes:jpeg,bmp,png',
+            'image_url' => 'url',
         ];
     }
 
@@ -50,5 +51,10 @@ class AddRequest extends FormRequest implements AddPayload
     public function getImage():? UploadedFile
     {
         return $this->file('image');
+    }
+
+    public function getImageUrl():? string
+    {
+        return $this->input('image_url');
     }
 }

@@ -13,4 +13,5 @@ interface AddPayload
     public function getDescription(): string;
     public function getPrice(): Money;
     public function getImage():? UploadedFile;
+    public function getImageUrl():? string;
 }
