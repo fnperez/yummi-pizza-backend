@@ -48,7 +48,9 @@ class EloquentInvoiceReadRepository extends EloquentReadRepository implements In
     {
         $query = $this->query();
 
-        $query->where('cart_id', $cart->getId());
+        $query = $query->where('cart_id', $cart->getId());
+
+        logger($query->toSql());
 
         return $query->first();
     }

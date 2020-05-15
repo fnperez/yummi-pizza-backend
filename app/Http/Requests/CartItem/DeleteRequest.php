@@ -7,38 +7,27 @@ namespace App\Http\Requests\CartItem;
 use Illuminate\Foundation\Http\FormRequest;
 use YummiPizza\Contracts\ICart;
 use YummiPizza\Contracts\IProduct;
-use YummiPizza\Entities\Cart;
-use YummiPizza\Payloads\CartItem\AddPayload;
+use YummiPizza\Payloads\CartItem\DeletePayload;
 use YummiPizza\Repositories\CartRepository;
 use YummiPizza\Repositories\ProductRepository;
 
-class AddRequest extends FormRequest implements AddPayload
+class DeleteRequest extends FormRequest implements DeletePayload
 {
     public function rules()
     {
         return [
-            'cart_id' => 'exists:carts,id',
+            'cart_id' => 'required|exists:carts,id',
             'product_id' => 'required|exists:products,id',
-            'quantity' => 'integer|min:1',
         ];
     }
 
     public function getCart(): ICart
     {
-        if ($this->has('cart_id')) {
-            return  app(CartRepository::class)->get($this->input('cart_id'));
-        }
-
-        return new Cart;
+        return app(CartRepository::class)->get($this->input('cart_id'));
     }
 
     public function getProduct(): IProduct
     {
         return app(ProductRepository::class)->get($this->input('product_id'));
-    }
-
-    public function getQuantity(): int
-    {
-        return (int) $this->input('quantity', 1);
     }
 }

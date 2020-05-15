@@ -6,5 +6,5 @@ namespace YummiPizza\Contracts;
 
 interface IEntity
 {
-    public function getId(): string;
+    public function getId(): ?string;
 }

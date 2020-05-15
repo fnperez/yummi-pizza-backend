@@ -47,6 +47,7 @@ Route::group(['prefix' => 'carts'], function() {
 
 Route::group(['prefix' => 'cart_items'], function() {
     Route::post('/', \App\Http\Handlers\CartItem\AddHandler::class)->middleware('app.check-cart');
+    Route::delete('/', \App\Http\Handlers\CartItem\DeleteHandler::class)->middleware('app.check-cart');
     Route::put('{id}', \App\Http\Handlers\CartItem\EditHandler::class)->middleware('app.check-cart-item');
 });
 

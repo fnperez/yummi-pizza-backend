@@ -16,7 +16,7 @@ class Address extends Model implements IAddress
     public $incrementing = false;
     public $keyType = 'string';
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }

@@ -13,7 +13,7 @@ class CartResource extends JsonResource
     {
         return [
             'id' => $this->getId(),
-            'items' => CartItemResource::collection($this->items),
+            'items' => CartItemResource::collection($this->whenLoaded('items')),
             'price' => CurrencyResource::make($this->getTotalPrice()),
             'created_at' => $this->getCreatedAt(),
             'updated_at' => $this->getUpdatedAt(),

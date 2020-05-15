@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace YummiPizza\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Money\Money;
 use YummiPizza\Contracts\ICartItem;
 use YummiPizza\Contracts\ICart;
+use YummiPizza\Contracts\IProduct;
 use YummiPizza\Traits\HasTimestamps;
 use YummiPizza\Traits\UuidGenerator;
 
@@ -23,7 +25,7 @@ class Cart extends Model implements ICart
         return $this->hasMany(CartItem::class, 'cart_id');
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -31,21 +33,9 @@ class Cart extends Model implements ICart
     /**
      * @return ICartItem[]
      */
-    public function getItems(): array
+    public function getItems(): Collection
     {
-        return $this->items->all();
-    }
-
-    public function addItem(ICartItem $item): void
-    {
-        $this->items->add($item);
-    }
-
-    public function addBulk(array $items): void
-    {
-        foreach ($items as $item) {
-            $this->addItem($item);
-        }
+        return $this->items;
     }
 
     public function getTotalPrice(): Money
@@ -57,5 +47,17 @@ class Cart extends Model implements ICart
         }
 
         return $price;
+    }
+
+    public function hasProduct(IProduct $product): bool
+    {
+        return $this->getCartItem($product) !== null;
+    }
+
+    public function getCartItem(IProduct $product):? ICartItem
+    {
+        return $this->getItems()->first(function(ICartItem $item) use ($product) {
+            return $item->getProduct()->getId() === $product->getId();
+        });
     }
 }

@@ -51,8 +51,6 @@ class CorsMiddleware
             $response->header($key, $value);
         }
 
-        logger()->debug(json_encode($response->headers->all()));
-
         return $response;
     }
 }

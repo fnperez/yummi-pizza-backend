@@ -18,7 +18,7 @@ class Product extends Model implements IProduct
     public $incrementing = false;
     public $keyType = 'string';
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }

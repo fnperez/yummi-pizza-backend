@@ -16,6 +16,8 @@ class CartItemResource extends JsonResource
             'quantity' => $this->getQuantity(),
             'price' => CurrencyResource::make($this->getPrice()),
             'total_price' => CurrencyResource::make($this->getTotalPrice()),
+            'product' => ProductResource::make($this->getProduct()),
+            'cart' => CartResource::make($this->getCart()),
             'created_at' => $this->getCreatedAt(),
             'updated_at' => $this->getUpdatedAt(),
         ];

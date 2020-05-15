@@ -25,7 +25,12 @@ class CartItem extends Model implements ICartItem
         return $this->belongsTo(Cart::class, 'cart_id');
     }
 
-    public function getId(): string
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function getId(): ?string
     {
         return $this->getKey();
     }
@@ -85,6 +90,21 @@ class CartItem extends Model implements ICartItem
         return $this->getPrice()->multiply($this->getQuantity());
     }
 
+    public function getProduct(): IProduct
+    {
+        return $this->product;
+    }
+
+    public function setProduct(IProduct $product): void
+    {
+        $this->product()->associate($product);
+    }
+
+    public function addQuantity(int $quantity = 1): void
+    {
+        $this->setQuantity($this->getQuantity() + $quantity);
+    }
+
     public static function make(IProduct $product, ICart $cart, int $quantity = 1): ICartItem
     {
         $item = new static;
@@ -94,6 +114,7 @@ class CartItem extends Model implements ICartItem
         $item->setDescription($product->getDescription());
         $item->setQuantity($quantity);
         $item->setCart($cart);
+        $item->setProduct($product);
 
         return $item;
     }

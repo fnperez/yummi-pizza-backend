@@ -108,7 +108,7 @@ class User extends Authenticatable implements JWTSubject, IUser
         ])->save();
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->getKey();
     }

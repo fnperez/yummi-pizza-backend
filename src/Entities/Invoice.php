@@ -39,7 +39,7 @@ class Invoice extends Model implements IInvoice
         return $this->belongsTo(Address::class, 'address_id');
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->getKey();
     }
