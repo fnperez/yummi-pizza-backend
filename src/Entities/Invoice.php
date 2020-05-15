@@ -56,7 +56,7 @@ class Invoice extends Model implements IInvoice
 
     public function getCustomer(): ?IUser
     {
-        return $this->user;
+        return $this->customer;
     }
 
     public function getAddress(): IAddress
@@ -107,7 +107,7 @@ class Invoice extends Model implements IInvoice
             return;
         }
 
-        $this->user()->associate($customer);
+        $this->customer()->associate($customer);
     }
 
     public function setAddress(IAddress $address, IDeliveryCalculator $calculator): void
